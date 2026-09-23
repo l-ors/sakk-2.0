@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sakk 2.0</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game" data-mode="casual">
+    <div id="bar">
+      <h1>Sakk 2.0</h1>
+
+      <!-- Game modes -->
+      <label>Mód:
+        <select id="mode-select">
+          <option value="casual">Barátságos</option>
+          <option value="timed">Órás</option>
+          <option value="ai">Gép</option>
+        </select>
+      </label>
+
+      <!-- Controls of the casual tab -->
+      <div class="tab-controls" data-mode="casual">
+        <label><input type="checkbox" id="freehand"> Szabad kéz</label>
+      </div>
+
+      <!-- Controls of the timed tab -->
+      <div class="tab-controls" data-mode="timed">
+        <label>Idő:
+          <select id="time-select">
+            <option value="2">2 perc</option>
+            <option value="3">3 perc</option>
+            <option value="5">5 perc</option>
+            <option value="10" selected>10 perc</option>
+            <option value="20">20 perc</option>
+            <option value="30">30 perc</option>
+            <option value="60">60 perc</option>
+            <option value="90">90 perc</option>
+          </select>
+        </label>
+        <label><input type="checkbox" id="flip"> Tábla forgatása</label>
+      </div>
+
+      <!-- Controls of the computer tab -->
+      <div class="tab-controls" data-mode="ai">
+        <label>Mélység:
+          <select id="depth-select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </label>
+        <progress id="think" max="1" value="0"></progress>
+      </div>
+
+      <button id="reset">Új játék</button>
+    </div>
+
+    <p id="status">Világos lép</p>
+
+    <div id="play">
+      <!-- Pieces taken by the dark side, its point lead and its clock -->
+      <div class="tray">
+        <span class="side-name">Sötét</span>
+        <span class="taken" id="taken-black"></span>
+        <span class="lead" id="lead-black"></span>
+        <span class="clock" id="clock-black"></span>
+      </div>
+
+      <div id="board"></div>
+
+      <!-- Pieces taken by the light side, its point lead and its clock -->
+      <div class="tray">
+        <span class="side-name">Világos</span>
+        <span class="taken" id="taken-white"></span>
+        <span class="lead" id="lead-white"></span>
+        <span class="clock" id="clock-white"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/pieces.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/moves.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

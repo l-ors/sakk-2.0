@@ -1,0 +1,259 @@
+:root {
+  --light: #eeeed2;
+  --dark: #769656;
+  --light-selected: #f6f669;
+  --dark-selected: #baca44;
+  /* The board grows with the screen, but never gets too small or too big */
+  --square: clamp(26px, min(9.5vh, 8.8vw), 84px);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+  background: #312e2b;
+  color: #eee;
+  font-family: Arial, sans-serif;
+  user-select: none;
+}
+
+#game {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Title, status and the new game button in one row above the board */
+#bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+h1 {
+  margin: 0;
+  font-weight: normal;
+  font-size: clamp(18px, 3vw, 30px);
+}
+
+#status {
+  margin: 0;
+  margin-right: auto;
+  font-size: clamp(14px, 2vw, 20px);
+}
+
+#reset {
+  padding: 8px 14px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  background: var(--dark);
+  color: #fff;
+  cursor: pointer;
+}
+
+#reset:hover {
+  background: var(--dark-selected);
+  color: #222;
+}
+
+/* Mode picker and the other dropdowns */
+#bar label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+}
+
+#bar select {
+  padding: 6px 8px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #3d3a37;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* How far the engine is with its move */
+#think {
+  width: 120px;
+  height: 14px;
+}
+
+/* Each tab's own controls, shown only while that tab is open */
+.tab-controls {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}
+
+#game[data-mode="casual"] .tab-controls[data-mode="casual"],
+#game[data-mode="timed"] .tab-controls[data-mode="timed"],
+#game[data-mode="ai"] .tab-controls[data-mode="ai"] {
+  display: flex;
+}
+
+.tab-controls label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.soon {
+  color: #aaa;
+}
+
+/* The clocks belong to the timed tab only */
+.clock {
+  margin-left: auto;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: #3d3a37;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock.active {
+  background: var(--light);
+  color: #222;
+}
+
+#game:not([data-mode="timed"]) .clock {
+  display: none;
+}
+
+/* Turning the board also swaps the two trays */
+#play {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#play.flipped {
+  flex-direction: column-reverse;
+}
+
+/* Captured pieces and the point lead of one side */
+.tray {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  font-size: 14px;
+}
+
+.side-name {
+  color: #aaa;
+}
+
+.taken {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+}
+
+.lead {
+  font-weight: bold;
+}
+
+/* The board is a CSS grid, --cols and --rows are set from JS */
+#board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--square));
+  grid-template-rows: repeat(var(--rows), var(--square));
+  border: 4px solid #222;
+}
+
+.square {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.square.light { background: var(--light); }
+.square.dark { background: var(--dark); }
+.square.light.selected { background: var(--light-selected); }
+.square.dark.selected { background: var(--dark-selected); }
+
+/* Possible move: a dot in the middle of the square */
+.square.move::after {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Possible capture: a ring around the enemy piece */
+.square.capture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border: 7px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
+
+/* Choice list (promotion, Lovász capture): grows from the square in question */
+#picker {
+  position: absolute;
+  width: var(--square);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 0 0 0 2px #222, 0 6px 14px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.picker-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.picker-option:hover {
+  background: var(--light-selected);
+}
+
+/* Pieces are solid SVG shapes: "color" fills them, drop-shadows draw a thin outline */
+.piece {
+  display: block;
+  width: 80%;
+  height: 80%;
+}
+
+.piece svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.piece.white {
+  color: #fff;
+  filter: drop-shadow(1px 0 0 #333) drop-shadow(-1px 0 0 #333) drop-shadow(0 1px 0 #333) drop-shadow(0 -1px 0 #333);
+}
+
+/* Small copies of the pieces, used in the captured trays */
+.piece.mini {
+  width: 22px;
+  height: 22px;
+}
+
+.piece.black {
+  color: #222;
+  filter: drop-shadow(1px 0 0 #888) drop-shadow(-1px 0 0 #888) drop-shadow(0 1px 0 #888) drop-shadow(0 -1px 0 #888);
+}

@@ -1,0 +1,133 @@
+=== Prompt 1 ===
+
+We are doing a game dev challenge for a YouTube video: we need to create a game in 1 hour 30 minutes.
+
+Setup:
+* We work purely with HTML, CSS, JS, no frameworks, no libraries, no CDNs
+* Use plain <script> tags, no JS modules, so the game runs by opening index.html directly
+* Target: desktop first. Add touch controls only if it's a quick add or asked explicitly
+* You may create as many files for JS or CSS as appropriate
+* Listen to me, don't wander off, unless I explicitly tell you to brainstorm or let you figure it out
+* Don't add features, refactors, or polish I didn't ask for
+* Relatively quick turns should be the goal, meaning you do everything I ask for with full force, but you outsource verifying and testing (if needed) to another agent, that does not disturb the main line of work
+* If something is unclear, ask rather than go off
+* Code should be simple and well structured, it'll be shared with beginner / inspired people
+* Your replies should be as information dense as possible
+* After each change, give a short summary in this format:
+
+what changed: 1-2 sentences tldr (always include)
+anything worth flagging: 1-2 sentences tldr (only if something actually surfaced, otherwise omit this line)
+idea: 1-2 sentences tldr (only if you have one that would genuinely add to the game and I seem to be missing it, otherwise omit this line)
+
+Append every prompt (including this one) to a root "prompts.txt" file immediately, before doing the work. Only correct typos, no grammar fixes or rewording, so my audience can reproduce the steps.
+
+Also append each prompt, translated into Hungarian as faithfully as possible, to "prompts-hu.txt". Start that file with this disclaimer: "Ez a szöveg mesterséges intelligenciával, automatikusan lett fordítva."
+
+In the next turn I'll explain the game we'll be doing, and the timer will start.
+
+Reply "ready" when you are... well, ready.
+
+=== Prompt 2 ===
+
+Today's challenge: chess 2.0. We are gonna do custom movements, interactions, board size, and more, so keep this in mind.
+
+The first step is to create a classic, green-white aesthetic chess "1.0". Have the basic features, like the app should know who's turn it is, should indicate where a piece could move, etc. Keep it simple.
+
+=== Prompt 3 ===
+
+Okay, first piece to be reworked: pawn. I want it to be able to move backward. It can only ever move two squares once. Never back or forward again.
+
+Also, I want the pieces to have a more uniform design, and be like solid instead of the many lines we have.
+
+(added mid-turn:) Also, the app should be hungarian.
+
+=== Prompt 4 ===
+
+Okay, the whole theme of this chess 2.0 is to have old professions be the new names for the pieces.
+
+The king is now: Földesúr
+The queen is: Földesúrnő
+Gyalog is: jobbágy, and the next piece we want to rework is: bishop. From now on, the new name is "Tüzér", and the special ability: it goes max 8 squares diagonally, just as before, but it can now bounce back, like a ball.
+
+=== Prompt 5 ===
+
+Make sure the "Tüzér" can bounce as many times it's possible, but it keeps the 8 limit
+
+(added mid-turn:) Also, make sure, the Jobbágy can only ever move two squares, when it first moves, then never again, not back not forward.
+
+=== Prompt 6 ===
+
+Okay, next, the rook: I want to have a left rook and a right rook. The left rook can go up and down fully, as before on it's column, but can only move one right and left. The right kovács does exactly the opposite, it can go up and down one, but can move on the full row.
+
+Also, start making the design curvy, and duolingo like simple graphics to match their name and rework.
+
+(added mid-turn:) Keep the same one color / set, and also the left kovács and right kovács should look like variants.
+
+=== Prompt 7 ===
+
+Next one: horse. Rename to Lovász. Exact same thing as before, except when and if you take a figure with it, you can choose to make a jobbágy of it. This can be advantageous if you can take or threaten something with it that you couldn't before + you can promote the pawn (instantly) if it reaches the other side.
+
+=== Prompt 8 ===
+
+Next one: queen -> földesúrnő. She should be moving like the bishop in chess 1.0, meaning the whole diagonal, and it should not bounce back from the wall like how the tüzér does. It can move up left and right only one square. So its basically a bishop + king, or a bishop that can change squares.
+
+=== Prompt 9 ===
+
+Don't use sub agents anymore, we are pretty deep into a session limit
+
+(added mid-turn:) Try to be token efficient
+
+=== Prompt 10 ===
+
+Could you finish the task if anything is not yet finished?
+
+=== Prompt 11 ===
+
+Okay, new rule: the map should get two new rows and columns. A new figure should be added: vadász: he can move diagonally (up and back) two, and then it starts moving back to the direction of the starting column (it doesn't change vertical, only horizontal spaces) up to two squares. It moves linearly, this is important because it can get blocked by your own or other pieces. It should be worth 6 points. The földesúrnő only 7. And the Kovács only 4.
+
+(added mid-turn:) Vadász should be next to kovács, so kovács is in the corner
+
+=== Prompt 12 ===
+
+Okay: add a tally for pieces captured, point difference should be showed at the winning side with (+1) or however more point one leads with. Add a reset button, to have it go back to the original state. Make the board take up more screen. Be careful to keep it mobile friendly.
+
+=== Prompt 13 ===
+
+Okay. Remove two rows in the middle. So it should be a rectangle to accommodate for the new pieces.
+
+Vadász should be able to move the two diagonally like a bishop, taking anything in its way, blocked by it's own pieces. Then literally continue it's movement to the starting column, like a rook, taking anything in its way, or blocked by its team mate.
+
+Tüzér nerf it to 7 squares only
+
+=== Prompt 14 ===
+
+Some UI changes: when I promote a pawn I should be able to select from a list that appear to start from the pawn what I want instead (any figure, including vadász, not including földesúr). Use the same UI to create a choice between lovász and pawn when lovász captures anything.
+
+Also, create select tabulator. You can chose between the current, no time gamemode, where I should have two selection mode. A "free hand" mode where I can manually drag any pieces regardless of legality, and a mode where legality and turns are enforced so I can make positions and try them out.
+
+Another tab should be a time based match with a friend, with board flipping (toggleable), and a timer also selectable next to the tab selector, only appears on the appropriate tab. All the controls of each tabs should be inline with this tab controller, only appearing on it's tab. So You can choose between 2m, 3m, 5m, 10m, 20m, 30m, 60m, 90m time selector per player.
+
+And the last tab is the minimax based system, but don't start that yet see how we are with usage when we are done with this.
+
+Also, allow castling, but the only criteria that should be checked if whether not you are currently in check, the move is check free, and that's it. If you moved your king, and you moved it back, it's forgiven.
+
+=== Prompt 15 ===
+
+Bug: jobbágy can move backwards two squares, even though it should be able to ever move squares on its first move.
+Bug: you can move other pieces when I'm in check, and also getting mated isn't properly won:
+Bug: the piece selector dropdown breaks the UI and squares.
+
+=== Prompt 16 ===
+
+Bug: when I take something with a lovász, and choose to make it a pawn, it consumes it.
+
+=== Prompt 17 ===
+
+Horse should always move in, and when it captures, it has the chance (player choice) to turn into a pawn (jobbágy). It turns into, doesn't spawn anything. And if it turns into a pawn on the last rank you should be able to choose any piece, like when you rank up
+
+The tabs should be a select menu, not always visible the all three options.
+
+I want you to create a classical minimax algorithm, like what we have for chess. If you mate, or take have more figures, or more developed figures, you should be ahead.
+
+Make it optimized search. A select should allow to change depth for search, (this will change speed, but accuracy too), and also a progressbar that shows how long it is until the engine does the next move.
+

@@ -1,0 +1,135 @@
+Ez a szöveg mesterséges intelligenciával, automatikusan lett fordítva.
+
+=== 1. prompt ===
+
+Egy játékfejlesztési kihívást csinálunk egy YouTube-videóhoz: 1 óra 30 perc alatt kell létrehoznunk egy játékot.
+
+Felállás:
+* Tisztán HTML-lel, CSS-sel, JS-sel dolgozunk, keretrendszerek, könyvtárak és CDN-ek nélkül
+* Sima <script> tageket használj, JS modulok nélkül, hogy a játék az index.html közvetlen megnyitásával fusson
+* Cél: elsősorban asztali gép. Érintőképernyős vezérlést csak akkor adj hozzá, ha gyorsan megoldható, vagy ha kifejezetten kérem
+* Annyi JS vagy CSS fájlt hozhatsz létre, amennyi indokolt
+* Hallgass rám, ne kalandozz el, hacsak nem mondom kifejezetten, hogy ötletelj, vagy hagyom, hogy te találd ki
+* Ne adj hozzá olyan funkciókat, refaktorálásokat vagy csiszolásokat, amiket nem kértem
+* A viszonylag gyors körök legyenek a cél, vagyis mindent, amit kérek, teljes erővel megcsinálsz, de az ellenőrzést és tesztelést (ha szükséges) kiszervezed egy másik ügynöknek, ami nem zavarja a fő munkafolyamatot
+* Ha valami nem világos, inkább kérdezz, mint hogy elkalandozz
+* A kód legyen egyszerű és jól strukturált, kezdőkkel / inspirált emberekkel lesz megosztva
+* A válaszaid legyenek a lehető leginformációsűrűbbek
+* Minden változtatás után adj egy rövid összefoglalót ebben a formában:
+
+mi változott: 1-2 mondatos tldr (mindig szerepeljen)
+bármi, amit érdemes megjegyezni: 1-2 mondatos tldr (csak ha tényleg felmerült valami, egyébként hagyd ki ezt a sort)
+ötlet: 1-2 mondatos tldr (csak ha van olyan, ami tényleg hozzáadna a játékhoz, és úgy tűnik, nekem elkerülte a figyelmemet, egyébként hagyd ki ezt a sort)
+
+Minden promptot (ezt is beleértve) azonnal, a munka megkezdése előtt fűzz hozzá egy gyökérkönyvtárbeli "prompts.txt" fájlhoz. Csak az elgépeléseket javítsd, nyelvtani javítás vagy átfogalmazás nélkül, hogy a közönségem reprodukálni tudja a lépéseket.
+
+Emellett minden promptot, a lehető leghűségesebben magyarra fordítva, fűzz hozzá a "prompts-hu.txt" fájlhoz. Ezt a fájlt ezzel a figyelmeztetéssel kezdd: "Ez a szöveg mesterséges intelligenciával, automatikusan lett fordítva."
+
+A következő körben elmagyarázom, milyen játékot fogunk csinálni, és elindul az időzítő.
+
+Válaszolj azzal, hogy "ready", ha... nos, ha készen állsz.
+
+=== 2. prompt ===
+
+A mai kihívás: sakk 2.0. Egyedi mozgásokat, interakciókat, táblaméretet és még sok mást fogunk csinálni, szóval ezt tartsd észben.
+
+Az első lépés egy klasszikus, zöld-fehér megjelenésű sakk „1.0” elkészítése. Legyenek meg az alapfunkciók, például az alkalmazás tudja, ki következik, jelezze, hová léphet egy bábu, stb. Tartsd egyszerűen.
+
+=== 3. prompt ===
+
+Oké, az első átdolgozandó bábu: a gyalog. Azt akarom, hogy tudjon hátrafelé lépni. Két mezőt csak egyetlenegyszer léphet. Utána soha többé, se hátra, se előre.
+
+Emellett azt akarom, hogy a bábuknak egységesebb legyen a kinézete, és legyenek inkább tömörek a sok vonal helyett, ami most van.
+
+(kör közben hozzáfűzve:) Továbbá az alkalmazás legyen magyar.
+
+=== 4. prompt ===
+
+Oké, a sakk 2.0 egész témája az, hogy régi foglalkozások legyenek a bábuk új nevei.
+
+A király mostantól: Földesúr
+A királynő: Földesúrnő
+A gyalog: jobbágy, és a következő bábu, amit átdolgozunk: a futó. Mostantól az új neve „Tüzér”, és a különleges képessége: legfeljebb 8 mezőt megy átlósan, ahogy eddig, de most már vissza tud pattanni, mint egy labda.
+
+=== 5. prompt ===
+
+Gondoskodj róla, hogy a „Tüzér” annyiszor tudjon pattanni, ahányszor csak lehet, de tartsa meg a 8-as korlátot
+
+(kör közben hozzáfűzve:) Továbbá gondoskodj róla, hogy a Jobbágy csak akkor léphessen két mezőt, amikor először lép, utána soha többé, se hátra, se előre.
+
+=== 6. prompt ===
+
+Oké, következő a bástya: legyen egy bal bástya és egy jobb bástya. A bal bástya teljesen tud fel-le menni a saját oszlopában, mint eddig, de jobbra és balra csak egyet léphet. A jobb kovács pontosan az ellenkezőjét csinálja: fel-le egyet tud menni, de a teljes soron mozoghat.
+
+Emellett kezdd el a dizájnt gömbölydedebbé tenni, duolingo-szerű egyszerű grafikákkal, hogy illeszkedjenek a nevükhöz és az átdolgozásukhoz.
+
+(kör közben hozzáfűzve:) Maradjon ugyanaz az egy szín / készlet, és a bal kovács és a jobb kovács nézzenek ki egymás változatainak.
+
+=== 7. prompt ===
+
+Következő: a ló. Nevezd át Lovászra. Pontosan ugyanaz, mint eddig, kivéve, hogy ha és amikor leütsz vele egy figurát, választhatod, hogy jobbágyot csinálsz belőle. Ez akkor lehet előnyös, ha olyat tudsz vele leütni vagy fenyegetni, amit korábban nem tudtál + (azonnal) elő tudod léptetni a gyalogot, ha eléri a túloldalt.
+
+=== 8. prompt ===
+
+Következő: a királynő -> földesúrnő. Úgy kell mozognia, mint a futó a sakk 1.0-ban, vagyis a teljes átlón, és nem szabad visszapattannia a falról, ahogy a tüzér teszi. Fel, balra és jobbra csak egy mezőt léphet. Szóval alapvetően egy futó + király, vagy egy futó, ami mezőszínt tud váltani.
+
+=== 9. prompt ===
+
+Ne használj többé alügynököket, elég mélyen benne vagyunk egy munkamenet-limitben
+
+(kör közben hozzáfűzve:) Próbálj token-hatékony lenni
+
+=== 10. prompt ===
+
+Be tudnád fejezni a feladatot, ha valami még nincs kész?
+
+=== 11. prompt ===
+
+Oké, új szabály: a pálya kapjon két új sort és oszlopot. Egy új figurát kell hozzáadni: vadász: két mezőt tud átlósan lépni (előre és hátra), majd elkezd visszafelé mozogni a kiinduló oszlop irányába (nem változtat függőlegesen, csak vízszintes mezőket) legfeljebb két mezőt. Lineárisan mozog, ez azért fontos, mert a saját vagy más bábuk blokkolhatják. 6 pontot érjen. A földesúrnő csak 7-et. A Kovács pedig csak 4-et.
+
+(kör közben hozzáfűzve:) A vadász a kovács mellett legyen, tehát a kovács van a sarokban
+
+=== 12. prompt ===
+
+Oké: adj hozzá egy kimutatást a leütött bábukról, a pontkülönbség a vezető oldalnál jelenjen meg (+1) formában, vagy amennyivel több ponttal vezet valaki. Adj hozzá egy visszaállító gombot, ami visszaállítja az eredeti állapotot. A tábla foglaljon el több helyet a képernyőn. Ügyelj rá, hogy mobilbarát maradjon.
+
+=== 13. prompt ===
+
+Oké. Vegyél ki két sort középről. Szóval téglalap legyen, hogy elférjenek az új bábuk.
+
+A vadász tudjon a kettőt átlósan lépni, mint egy futó, leütve bármit, ami az útjába kerül, a saját bábui pedig blokkolják. Aztán szó szerint folytassa a mozgását a kiinduló oszlop felé, mint egy bástya, leütve bármit, ami az útjába kerül, vagy blokkolja a csapattársa.
+
+Tüzér: nerfeld le csak 7 mezőre
+
+=== 14. prompt ===
+
+Néhány UI-változtatás: amikor előléptetek egy gyalogot, egy listából tudjam kiválasztani, ami a gyalogtól indulva jelenik meg, hogy mi legyen helyette (bármelyik figura, a vadászt is beleértve, a földesurat nem). Ugyanezt az UI-t használd arra, hogy választani lehessen a lovász és a gyalog között, amikor a lovász leüt valamit.
+
+Emellett készíts fülválasztót. Lehessen választani a jelenlegi, idő nélküli játékmód között, ahol két kiválasztási mód legyen. Egy „szabad kéz” mód, ahol bármelyik bábut szabadon mozgathatom a szabályosságtól függetlenül, és egy mód, ahol a szabályosság és a körök érvényesítve vannak, hogy állásokat tudjak felépíteni és kipróbálni.
+
+Egy másik fül legyen egy idő alapú meccs egy baráttal, forgatható táblával (kapcsolható), és egy szintén választható időzítővel a fülválasztó mellett, ami csak a megfelelő fülön jelenik meg. Az egyes fülek összes vezérlője legyen egy sorban ezzel a fülválasztóval, és csak a saját fülén jelenjen meg. Tehát játékosonként a 2m, 3m, 5m, 10m, 20m, 30m, 60m, 90m időbeállítások közül lehessen választani.
+
+Az utolsó fül pedig a minimax alapú rendszer, de ezt még ne kezdd el, nézzük meg, hogy állunk a használattal, ha ezzel végeztünk.
+
+Továbbá engedélyezd a sáncolást, de az egyetlen feltétel, amit ellenőrizni kell, az az, hogy éppen sakkban vagy-e, hogy a lépés sakkmentes-e, és ennyi. Ha megmozdítottad a királyt, majd visszaléptél vele, az meg van bocsátva.
+
+=== 15. prompt ===
+
+Hiba: a jobbágy hátrafelé is tud két mezőt lépni, pedig csak az első lépésekor léphetne két mezőt.
+Hiba: más bábukkal is tudok lépni, amikor sakkban vagyok, és a mattadás sincs rendesen megnyerve:
+Hiba: a bábuválasztó legördülő elrontja a felületet és a mezőket.
+
+=== 16. prompt ===
+
+Hiba: amikor leütök valamit egy lovásszal, és azt választom, hogy legyen belőle gyalog, felemészti.
+
+=== 17. prompt ===
+
+A ló mindig lépjen be, és amikor üt, legyen esélye (játékos választása), hogy gyaloggá (jobbággyá) változzon. Átváltozik, nem hoz létre semmit. És ha az utolsó soron változik gyaloggá, akkor bármelyik bábut lehessen választani, mint amikor előléptetsz.
+
+A fülek legyenek egy legördülő menü, ne látszódjon mindig mindhárom lehetőség.
+
+Azt szeretném, hogy készíts egy klasszikus minimax algoritmust, mint amilyen a sakkban van. Ha mattot adsz, vagy több figurád van, vagy fejlettebb figuráid vannak, akkor előnyben kell lenned.
+
+Legyen optimalizált a keresés. Egy legördülővel lehessen állítani a keresési mélységet (ez a sebességet is változtatja, de a pontosságot is), és legyen egy folyamatjelző is, ami mutatja, mennyi van hátra, amíg a gép meglépi a következő lépését.
+
